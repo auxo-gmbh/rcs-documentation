@@ -1,0 +1,111 @@
+name: rcs-10
+root: ~/
+
+aliases:
+  - &app_command "timeout 1m java -Dspring.profiles.active=ACO,remote -jar rain-cloud-system-1.0.0-exec.jar --spring.config.location=application.properties"
+
+windows:
+  - s:
+      layout: tiled
+      synchronize: after
+      panes:
+        - s2-10:
+            - echo test
+        - w2-9:
+            - echo test
+  - s:
+      layout: tiled
+      synchronize: after
+      panes:
+        - s2-10:
+            - echo test
+        - w2-9:
+            - echo test
+  - s:
+      layout: tiled
+      synchronize: after
+      panes:
+        - s2-10:
+            - echo test
+        - w2-9:
+            - echo test
+  - s:
+      layout: tiled
+      synchronize: after
+      panes:
+        - s2-10:
+            - echo test
+        - w2-9:
+            - echo test
+  - s:
+      layout: tiled
+      synchronize: after
+      panes:
+        - s2-10:
+            - echo test
+        - w2-9:
+            - echo test
+  - s:
+      layout: tiled
+      synchronize: after
+      panes:
+        - s2-10:
+            - echo test
+        - w2-9:
+            - echo test
+  - s:
+      layout: tiled
+      synchronize: after
+      panes:
+        - s2-10:
+            - echo test
+        - w2-9:
+            - echo test
+  - s:
+      layout: tiled
+      synchronize: after
+      panes:
+        - s2-10:
+            - echo test
+        - w2-9:
+            - echo test
+  - s:
+      layout: tiled
+      synchronize: after
+      panes:
+        - s2-10:
+            - echo test
+        - w2-9:
+            - echo test
+  - s:
+      layout: tiled
+      synchronize: after
+      panes:
+        - s2-10:
+            - echo test
+        - w2-9:
+            - echo test
+  - s:
+      layout: tiled
+      synchronize: after
+      panes:
+        - s2-10:
+            - echo test
+        - w2-9:
+            - echo test
+  - s:
+      layout: tiled
+      synchronize: after
+      panes:
+        - s2-10:
+            - echo test
+        - w2-9:
+            - echo test
+  - s:
+      layout: tiled
+      synchronize: after
+      panes:
+        - s2-10:
+            - echo test
+        - w2-9:
+            - echo test

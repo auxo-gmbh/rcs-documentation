@@ -1,0 +1,24 @@
+@startuml C4_Elements_Context
+!include https://raw.githubusercontent.com/plantuml-stdlib/C4-PlantUML/master/C4_Context.puml
+
+!define FONTAWESOME https://raw.githubusercontent.com/tupadr3/plantuml-icon-font-sprites/master/font-awesome-5
+!include FONTAWESOME/cloud_rain.puml
+!include FONTAWESOME/server.puml
+
+LAYOUT_LANDSCAPE()
+
+title "System Context Diagram"
+
+Person(devOpsEngineer, "DevOps Engineer", "Setups and manages the nodes in a cluster. Responsible for defining node tasks and deploying nodes.")
+
+System(system, "Rain Cloud System", "Framework responsible for communication and task coordination between various nodes inside a cluster.", $sprite="cloud_rain")
+
+System_Ext(node, "Node", "Standalone machine with sensing, processing, storage, and network capabilities. Nodes process or send tasks to other nodes if overloaded -- examples: IoT node, Edge server, etc.", $sprite="server")
+
+Rel(devOpsEngineer, node, "deploys & manages")
+
+Rel(node, system, "runs")
+
+SHOW_LEGEND(false)
+
+@enduml

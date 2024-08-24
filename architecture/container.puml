@@ -1,0 +1,31 @@
+@startuml C4_Elements_Context
+!include https://raw.githubusercontent.com/plantuml-stdlib/C4-PlantUML/master/C4_Container.puml
+
+!define DEVICONS https://raw.githubusercontent.com/tupadr3/plantuml-icon-font-sprites/master/devicons2
+!include DEVICONS/spring.puml
+
+LAYOUT_LANDSCAPE()
+
+title "Container Diagram"
+
+AddRelTag("async", $textColor="$ARROW_COLOR", $lineColor="$ARROW_COLOR", $lineStyle = DashedLine())
+
+System_Boundary(system, "Node") {
+    Container(rainCloudContainer, "Rain Cloud System", "Spring Boot, Kotlin", "Importable Maven dependency responsible for communication and task coordination between nodes in a cluster -- running on each node.", $sprite="spring")
+    Container_Ext(application, "Node Application", "Spring Boot", "Primary application running on the node. The application imports the framework to coordinate tasks and communicate with other nodes.", $sprite="spring")
+    Rel(application, rainCloudContainer, "uses")
+}
+
+System_Boundary(monitoring_system, "Monitoring System") {
+    ContainerQueue(monitoringQueue, "Message Broker", "RabbitMQ")
+    Container(monitoringContainer, "Monitoring Application", "Spring Boot, Java", "Responsible for receiving, mapping, and aggregating monitoring data like average queue occupations, constructed paths, etc.", $sprite="spring")
+    ContainerDb(monitoringDB, "Monitoring Database", "Neo4j", "Stores aggregated metrics as graph data.")
+    Rel(monitoringQueue, monitoringContainer, "publishes to", "HTTP/JSON", $tags="async")
+    Rel(monitoringContainer, monitoringDB, "reads from and writes to", "Spring Data")
+}
+
+Rel(rainCloudContainer, monitoringQueue, "publishes to", "HTTP/JSON", $tags="async")
+
+SHOW_LEGEND(false)
+
+@enduml

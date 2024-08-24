@@ -1,0 +1,62 @@
+@startuml C4_Elements_Context
+!include https://raw.githubusercontent.com/plantuml-stdlib/C4-PlantUML/master/C4_Component.puml
+
+title "Component Diagram"
+
+Component_Ext(emitter, "Emitter", "Spring Boot: Component Bean", "Emits task from sensor or similar to the strategy, which decides if the task will be processed on the node or offloaded.")
+
+Container_Boundary(container, "Rain Cloud System (RCS)") {
+    Boundary(communication, "Communication") {
+        Boundary(connections, "Connections") {
+            Component(outgoingConnectionsManager, "Outgoing Connections Manager", "Spring Boot: Component Bean", "Connects to external nodes in the same network by scanning a pre-defined port range.")
+            Component(incomingConnectionsManager, "Incoming Connections Manager", "Spring Boot: Component Bean", "Accepts the socket connection and creates a new communication link when an external node wants to connect to the current node.")
+        }
+        
+        Boundary(protocol, "Protocol") {
+            Component(nodeDiscoveryProtocol, "Node Discovery Protocol", "Spring Boot: Component Bean", "Responsible for reading, writing, and parsing requests/responses to detect which nodes are in the cluster and to which to connect.")
+            Component(selfActualizationProtocol, "Self-Actualization Protocol", "Spring Boot: Component Bean", "Responsible for reading, writing, and parsing requests/responses from the Self-Actualiztation Service.")
+            Component(randomWalkerProtocol, "Random Protocol", "Spring Boot: Component Bean", "Responsible for reading, writing, and parsing requests/responses from the Random strategy.")
+            Component(acoProtocol, "ACO Protocol", "Spring Boot: Component Bean", "Responsible for reading, writing, and parsing requests/responses from the ACO strategy.")
+            Component(gossipsProtocol, "Gossips Protocol", "Spring Boot: Component Bean", "Responsible for reading, writing, and parsing requests/responses from the Gossips strategy.")
+        }
+
+        Boundary(service, "Service") {
+            Component(selfActualizationService, "Self-Actualization Service", "Spring Boot: Component Bean", "Responsible for deciding which connections to other nodes should be gracefully closed.")
+        }
+
+        Boundary(commProperties, "Properties") {
+            Component(communicationProperties, "Communication Properties", "Spring Boot: Configuration Properties Bean", "Defines the parameter required for the communication.")
+        }
+    }
+
+    Boundary(coordination, "Coordination") {
+        Boundary(strategy, "Strategy") {
+            Component(randomWalkerStrategy, "Random Strategy", "Spring Boot: Component Bean", "Responsible for processing tasks or forwarding if overloaded. Forwarding to the next node is random until a not-overloaded node can process the task type.")
+            Component(acoStrategy, "ACO Strategy", "Spring Boot: Component Bean", "Responsible for processing tasks or forwarding if overloaded. Forwarding to the next node is determined by pheromones on connection edges. Component secrets and evaporates pheromones.")
+            Component(gossipsStrategy, "Gossips Strategy", "Spring Boot: Component Bean", "Responsible for processing tasks or forwarding if overloaded. If overloaded, component finds nodes that can assist by spreading Gossips.")
+        }
+
+        Boundary(coordProperties, "Properties") {
+            Component(acoProperties, "ACO Properties", "Spring Boot: Configuration Properties Bean", "Defines the parameter required for the ACO algorithm.")
+            Component(gossipsProperties, "Gossips Properties", "Spring Boot: Configuration Properties Bean", "Defines the parameter required for the Gossips algorithm.")
+        }
+
+        Boundary(queueBoundary, "Queue") {
+            Component(consumer, "Task Consumer", "Spring Boot: Component Bean", "Consumes tasks from the queue if available.")
+            ComponentQueue(queue, "Task Queue", "Spring Boot: Bean", "Linked Blocking Double Queue holds tasks to be processed in FIFO. All tasks after index i are in the waiting part of the queue and can be overloaded. I.e., index i determines if the node is overloaded.")
+            Component(offloadedTasks, "Offloaded Tasks", "Spring Boot: Bean", "Concurrent hash map holds all currently offloaded tasks associated with the request ID. Tasks, where TTL has passed are deleted automatically after some time.")
+        }
+    }
+
+    Boundary(shared, "Shared") {
+            Component(rcsProperties, "RCS Properties", "Spring Boot: Configuration Bean, Configuration Properties Bean", "Defines how many open connections to other nodes are allowed, amount of tasks until queue is full (overloaded, tasks must be offloaded), the port, port scan range to detect other nodes, etc.")
+            Component(nodeProfileConfig, "Node Profile", "Spring Boot: Bean", "Holds the node's profile, including processable tasks, the remote port for connecting other nodes, and storage, processing, and communication capabilities.")
+            ComponentDb(database, "Database", "Spring Boot: Component Bean", "In-memory database holding all open connections to neighbor nodes. Stores the remote port and remote node profile of each open link.")
+    }
+}
+
+Rel(emitter, strategy, "sends tasks to")
+
+footer "Component Diagram | Rain Cloud System"
+
+@enduml

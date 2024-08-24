@@ -1,0 +1,49 @@
+name: rcs-aco-10-filip
+root: ~/
+
+aliases:
+  - &app_command "timeout 60m java -Dspring.profiles.active=ACO,remote -jar rain-cloud-system-1.0.0-exec.jar --spring.config.location=application.properties"
+
+windows:
+  - strong-nodes:
+      layout: tiled
+      synchronize: after
+      panes:
+        - s1-2:
+            - ssh s1-2
+            - *app_command
+        - s2-2:
+            - ssh s2-2
+            - *app_command
+  - medium-nodes:
+      layout: tiled
+      synchronize: after
+      panes:
+        - m1-2:
+            - ssh m1-2
+            - *app_command
+        - m2-2:
+            - ssh m2-2
+            - *app_command
+        - m3-2:
+            - ssh m3-2
+            - *app_command
+  - weak-nodes:
+      layout: tiled
+      synchronize: after
+      panes:
+        - w1-2:
+            - ssh w1-2
+            - *app_command
+        - w2-2:
+            - ssh w2-2
+            - *app_command
+        - w3-2:
+            - ssh w3-2
+            - *app_command
+        - w4-2:
+            - ssh w4-2
+            - *app_command
+        - w5-2:
+            - ssh w5-2
+            - *app_command

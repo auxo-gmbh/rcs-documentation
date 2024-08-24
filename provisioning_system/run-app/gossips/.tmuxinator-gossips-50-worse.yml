@@ -1,0 +1,197 @@
+name: rcs-gossips-50-worse
+root: ~/
+
+aliases:
+  - &app_command "timeout 60m java -Dspring.profiles.active=Gossips,remote -jar rain-cloud-system-1.0.0-exec.jar --spring.config.location=application.properties"
+
+windows:
+  - strong-nodes-s1-6-10:
+      layout: tiled
+      synchronize: after
+      panes:
+        - s1-6:
+            - ssh -o StrictHostKeyChecking=no s1-6
+            - *app_command
+        - s1-7:
+            - ssh -o StrictHostKeyChecking=no s1-7
+            - *app_command
+        - s1-8:
+            - ssh -o StrictHostKeyChecking=no s1-8
+            - *app_command
+        - s1-9:
+            - ssh -o StrictHostKeyChecking=no s1-9
+            - *app_command
+        - s1-10:
+            - ssh -o StrictHostKeyChecking=no s1-10
+            - *app_command
+  - strong-nodes-s2-6-10:
+      layout: tiled
+      synchronize: after
+      panes:
+        - s2-6:
+            - ssh -o StrictHostKeyChecking=no s2-6
+            - *app_command
+        - s2-7:
+            - ssh -o StrictHostKeyChecking=no s2-7
+            - *app_command
+        - s2-8:
+            - ssh -o StrictHostKeyChecking=no s2-8
+            - *app_command
+        - s2-9:
+            - ssh -o StrictHostKeyChecking=no s2-9
+            - *app_command
+        - s2-10:
+            - ssh -o StrictHostKeyChecking=no s2-10
+            - *app_command
+  - medium-nodes-m1-6-10:
+      layout: tiled
+      synchronize: after
+      panes:
+        - m1-6:
+            - ssh -o StrictHostKeyChecking=no m1-6
+            - *app_command
+        - m1-7:
+            - ssh -o StrictHostKeyChecking=no m1-7
+            - *app_command
+        - m1-8:
+            - ssh -o StrictHostKeyChecking=no m1-8
+            - *app_command
+        - m1-9:
+            - ssh -o StrictHostKeyChecking=no m1-9
+            - *app_command
+        - m1-10:
+            - ssh -o StrictHostKeyChecking=no m1-10
+            - *app_command
+  - medium-nodes-m2-6-10:
+      layout: tiled
+      synchronize: after
+      panes:
+        - m2-6:
+            - ssh -o StrictHostKeyChecking=no m2-6
+            - *app_command
+        - m2-7:
+            - ssh -o StrictHostKeyChecking=no m2-7
+            - *app_command
+        - m2-8:
+            - ssh -o StrictHostKeyChecking=no m2-8
+            - *app_command
+        - m2-9:
+            - ssh -o StrictHostKeyChecking=no m2-9
+            - *app_command
+        - m2-10:
+            - ssh -o StrictHostKeyChecking=no m2-10
+            - *app_command
+  - medium-nodes-m3-6-10:
+      layout: tiled
+      synchronize: after
+      panes:
+        - m3-6:
+            - ssh -o StrictHostKeyChecking=no m3-6
+            - *app_command
+        - m3-7:
+            - ssh -o StrictHostKeyChecking=no m3-7
+            - *app_command
+        - m3-8:
+            - ssh -o StrictHostKeyChecking=no m3-8
+            - *app_command
+        - m3-9:
+            - ssh -o StrictHostKeyChecking=no m3-9
+            - *app_command
+        - m3-10:
+            - ssh -o StrictHostKeyChecking=no m3-10
+            - *app_command
+  - weak-nodes-w1-6-10:
+      layout: tiled
+      synchronize: after
+      panes:
+        - w1-6:
+            - ssh -o StrictHostKeyChecking=no w1-6
+            - *app_command
+        - w1-7:
+            - ssh -o StrictHostKeyChecking=no w1-7
+            - *app_command
+        - w1-8:
+            - ssh -o StrictHostKeyChecking=no w1-8
+            - *app_command
+        - w1-9:
+            - ssh -o StrictHostKeyChecking=no w1-9
+            - *app_command
+        - w1-10:
+            - ssh -o StrictHostKeyChecking=no w1-10
+            - *app_command
+  - weak-nodes-w2-6-10:
+      layout: tiled
+      synchronize: after
+      panes:
+        - w2-6:
+            - ssh -o StrictHostKeyChecking=no w2-6
+            - *app_command
+        - w2-7:
+            - ssh -o StrictHostKeyChecking=no w2-7
+            - *app_command
+        - w2-8:
+            - ssh -o StrictHostKeyChecking=no w2-8
+            - *app_command
+        - w2-9:
+            - ssh -o StrictHostKeyChecking=no w2-9
+            - *app_command
+        - w2-10:
+            - ssh -o StrictHostKeyChecking=no w2-10
+            - *app_command
+  - weak-nodes-w3-6-10:
+      layout: tiled
+      synchronize: after
+      panes:
+        - w3-6:
+            - ssh -o StrictHostKeyChecking=no w3-6
+            - *app_command
+        - w3-7:
+            - ssh -o StrictHostKeyChecking=no w3-7
+            - *app_command
+        - w3-8:
+            - ssh -o StrictHostKeyChecking=no w3-8
+            - *app_command
+        - w3-9:
+            - ssh -o StrictHostKeyChecking=no w3-9
+            - *app_command
+        - w3-10:
+            - ssh -o StrictHostKeyChecking=no w3-10
+            - *app_command
+  - weak-nodes-w4-6-10:
+      layout: tiled
+      synchronize: after
+      panes:
+        - w4-6:
+            - ssh -o StrictHostKeyChecking=no w4-6
+            - *app_command
+        - w4-7:
+            - ssh -o StrictHostKeyChecking=no w4-7
+            - *app_command
+        - w4-8:
+            - ssh -o StrictHostKeyChecking=no w4-8
+            - *app_command
+        - w4-9:
+            - ssh -o StrictHostKeyChecking=no w4-9
+            - *app_command
+        - w4-10:
+            - ssh -o StrictHostKeyChecking=no w4-10
+            - *app_command
+  - weak-nodes-w5-6-10:
+      layout: tiled
+      synchronize: after
+      panes:
+        - w5-6:
+            - ssh -o StrictHostKeyChecking=no w5-6
+            - *app_command
+        - w5-7:
+            - ssh -o StrictHostKeyChecking=no w5-7
+            - *app_command
+        - w5-8:
+            - ssh -o StrictHostKeyChecking=no w5-8
+            - *app_command
+        - w5-9:
+            - ssh -o StrictHostKeyChecking=no w5-9
+            - *app_command
+        - w5-10:
+            - ssh -o StrictHostKeyChecking=no w5-10
+            - *app_command
